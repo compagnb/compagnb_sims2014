@@ -11,9 +11,12 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    for(int i = 0; i < 20; i++){
+    // setup the classes size, angle and distance
+    
+    for(int i = 0; i < 40; i++){
         myRectangle[i].size = i*2;
-        myRectangle[i].set(40 * i, i);
+        //angle and distance - what angle to project and what distance
+        myRectangle[i].set(10 * i, i);
     }
     
     
@@ -22,12 +25,8 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    for(int i = 0; i < 20; i++){
-     //myRectangle.angle += TWO_PI/ofGetFrameRate();
-    
-    //    luna.radius += 0.1;
-    //    luna.radius *= 1.01;
-    
+    for(int i = 0; i < 40; i++){
+    //how far we should move, and the center of the class (not using the center in the code)
      myRectangle[i].update(0.01*i, ofPoint(i*40, i*60));
     }
     
@@ -35,8 +34,12 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
+    //change background color to grey
     ofBackground(220, 220, 220);
-    for(int i = 0; i < 20; i++){
+    
+    //draw class objects
+    for(int i = 0; i < 40; i++){
         myRectangle[i].draw();
     }
 }//--------------------------------------------------------------

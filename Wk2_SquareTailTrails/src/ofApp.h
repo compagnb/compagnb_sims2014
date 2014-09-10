@@ -28,6 +28,7 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-    rectangle myRectangle[20];
+    //class object
+    rectangle myRectangle[40];
 };
 

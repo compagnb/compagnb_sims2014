@@ -3,13 +3,13 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    for(int i = 0; i < 20; i++){
+    for(int i = 0; i < 100; i++){
         myBall[i].size = i*2;
-        myBall[i].set(30 * i, i);
+        myBall[i].set(10 * i, i);
         myBall[i].alpha = 100 - i*2;
         myBall[i].color.r = 255 - i*4;
         myBall[i].color.g = 0 + i*4;
-        myBall[i].color.b = 255 - i*5;
+        myBall[i].color.b = 255 - i*10;
     }
     
     
@@ -18,13 +18,13 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    for(int i = 0; i < 20; i++){
+    for(int i = 0; i < 100; i++){
         //myRectangle.angle += TWO_PI/ofGetFrameRate();
         
         //    luna.radius += 0.1;
         //    luna.radius *= 1.01;
         
-        myBall[i].update(0.01, ofPoint(i*.25, i*.25));
+        myBall[i].update(0.01, ofPoint(i*.1, i*.2));
     }
     
 }
@@ -32,7 +32,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofBackground(220, 220, 220);
-    for(int i = 0; i < 20; i++){
+    for(int i = 0; i < 100; i++){
         myBall[i].draw();
     }
 }//--------------------------------------------------------------
