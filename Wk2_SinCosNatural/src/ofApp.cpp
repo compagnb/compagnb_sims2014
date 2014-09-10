@@ -3,9 +3,15 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    //set u p the balls
     for(int i = 0; i < 100; i++){
+        //size
         myBall[i].size = i*2;
+        
+        //angle and distance
         myBall[i].set(10 * i, i);
+        
+        //color and alpha
         myBall[i].alpha = 100 - i*2;
         myBall[i].color.r = 255 - i*4;
         myBall[i].color.g = 0 + i*4;
@@ -18,12 +24,10 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
+    //move the balls
     for(int i = 0; i < 100; i++){
-        //myRectangle.angle += TWO_PI/ofGetFrameRate();
         
-        //    luna.radius += 0.1;
-        //    luna.radius *= 1.01;
-        
+        //
         myBall[i].update(0.01, ofPoint(i*.1, i*.2));
     }
     
@@ -31,7 +35,11 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
+    //set background color
     ofBackground(220, 220, 220);
+    
+    //draw balls
     for(int i = 0; i < 100; i++){
         myBall[i].draw();
     }
