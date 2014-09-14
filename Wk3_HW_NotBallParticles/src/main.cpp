@@ -1,10 +1,3 @@
-//
-//
-//  Wk3_HW_Sinusid
-//
-//  Created by compagnb on 9/13/14.
-//
-//
 #include "ofMain.h"
 #include "ofApp.h"
 

@@ -26,8 +26,8 @@ void ofApp::setup(){
         particle myParticle;
         
         float angle = ofGetElapsedTimef() * (i * 10.0);
-        float velX = ofRandom(-4,4);
-        float velY = ofRandom(-4,4);
+        float velX = ofRandom(-8,8);
+        float velY = ofRandom(-8,8);
         
         
         

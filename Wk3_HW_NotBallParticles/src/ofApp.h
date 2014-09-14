@@ -1,6 +1,6 @@
 //
 //
-//  Wk3_HW_Sinusid
+//  Wk3_HW_NotBallParticles
 //
 //  Created by compagnb on 9/13/14.
 //
@@ -27,27 +27,13 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+    
+        //declare an image
+        ofImage surf;
+    
+        //make a vector of particles
+        vector<particle> particles;
+    
+        void createParticle();
 		
-    
-        // make a vector of particles -  like an array
-        vector <particle> particles;
-    
-        //variables
-        float xOrig;
-        float yOrig;
-        float fade;
-    
-        unsigned int timer;
-        unsigned int randX;
-        unsigned int randY;
-    
-        unsigned int randR;
-        unsigned int randG;
-        unsigned int randB;
-    
-        void setRandomPos();
-        void setRandomColor();
-        void restart();
-
-	
 };
