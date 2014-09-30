@@ -20,7 +20,6 @@ class ofApp : public ofBaseApp{
     
         // let's make a vector of them
         vector <Particle> particles;
-    
-    ofPoint screen;
-		
+	
+	
 };
