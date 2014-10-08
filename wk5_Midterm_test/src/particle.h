@@ -23,10 +23,10 @@ class particle
 		void addClockwiseForce(particle &p, float radius, float scale);
 		void addCounterClockwiseForce(particle &p, float radius, float scale);
 	
-		
+		float mass,inverse_mass,drag;
 		void addDampingForce();
         
-		void setInitialCondition(float px, float py, float vx, float vy);
+		void setInitialCondition(float px, float py, float vx, float vy, float _mass);
         void update();
         void draw();
 	

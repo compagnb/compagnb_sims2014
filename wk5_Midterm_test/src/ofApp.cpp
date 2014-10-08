@@ -16,7 +16,7 @@ void ofApp::setup(){
 		int x = i % cols * 20;
 		int y = i / cols * 20;
 		particle p;
-        p.setInitialCondition(x, y, y==0 ? 0 : 1, 0.96);
+        p.setInitialCondition(x, y,0, 0.96,y==0 ? 0 : 1 );
 		ps.push_back(p);
 	}
     
@@ -95,8 +95,9 @@ void ofApp::setup(){
             sp.push_back(s);
 		}
     }
-    
-    
+//     for(int i=0; i<rows * cols; i++){
+//         sp[i].rest_length = (sp[i].b->pos - sp[i].a->pos).length();
+//     }
 }
 
 //--------------------------------------------------------------
@@ -115,7 +116,7 @@ void ofApp::update(){
     }
     
     for (int i = 0; i < ps.size(); i++){
-		ps[i].bounceOffWalls();
+		//ps[i].bounceOffWalls();
 		ps[i].addDampingForce();
 		ps[i].update();
 	}
@@ -127,15 +128,20 @@ void ofApp::draw(){
     ofEnableDepthTest(); // enable z buffering
     
     
-//ofTranslate(ofGetWidth()/2-200, 100, -300);
+ofTranslate(ofGetWidth()/2-200, 100, -300);
 	
-    
+//    glBegin(GL_POINT);
+//    glPointSize(5);
     for (int i = 0; i < ps.size(); i++){
 		ps[i].draw();
+//        glVertex3f(ps[i].pos.x, ps[i].pos.y,0);
+        
 	}
+//    glEnd();
+    
     glBegin(GL_LINES);
+    glLineWidth(2);
     for (int i = 0; i < sp.size(); i++){
-		glLineWidth(2);
         glVertex3f(sp[1].a->pos.x, sp[1].a->pos.y,0);
         glVertex3f(sp[1].b->pos.x, sp[1].b->pos.y,0);
 	}

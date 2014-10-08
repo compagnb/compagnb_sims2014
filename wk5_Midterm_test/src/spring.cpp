@@ -15,23 +15,23 @@ void spring::update(){
 		return;
 	}
 	
-//	ofVec2f pta = a->pos;
-//	ofVec2f ptb = b->pos;
-//	
-//	float theirDistance = (pta - ptb).length();
-//	float springForce = (springiness * (distance - theirDistance));
-//	ofVec2f frcToAdd = (pta-ptb).normalized() * springForce;
-//	
-//	a->addForce(frcToAdd.x, frcToAdd.y);
-//	b->addForce(-frcToAdd.x, -frcToAdd.y);
-//    
-    ofVec3f dir = b->pos - a->pos;
-    float dist = dir.length();
-    float f = (rest_length - dist) * k; // linear force spring
-    dir.normalize();
-    ofVec2f frcToAdd = dir * f;
-    a->addForce(frcToAdd.x, frcToAdd.y);
-    b->addForce(-frcToAdd.x, -frcToAdd.y);
+	ofVec2f pta = a->pos;
+	ofVec2f ptb = b->pos;
+
+	float theirDistance = (pta - ptb).length();
+	float springForce = (springiness * (distance - theirDistance));
+	ofVec2f frcToAdd = (pta-ptb).normalized() * springForce;
+	
+	a->addForce(frcToAdd.x, frcToAdd.y);
+	b->addForce(-frcToAdd.x, -frcToAdd.y);
+    
+//    ofVec2f dir = b->pos - a->pos;
+//    float dist = dir.length();
+//    float f = (rest_length - dist) * k; // linear force spring
+//    dir.normalize();
+//    ofVec2f frcToAdd = dir * f;
+//    a->addForce(frcToAdd.x, frcToAdd.y);
+//    b->addForce(-frcToAdd.x, -frcToAdd.y);
 }
 
 

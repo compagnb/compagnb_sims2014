@@ -3,9 +3,17 @@
 
 //------------------------------------------------------------
 particle::particle(){
-	setInitialCondition(0,0,0,0);
+	setInitialCondition(0,0,0,0,0);
 	damping = 0.05f;
+    drag = 0.96;
 	bFixed = false;
+    if (mass==0.0f){
+       inverse_mass = 0;
+    }else if (mass<0.001){
+      mass=0.001;
+    }if (mass!=0.0f) {
+     inverse_mass = 1/mass;
+    }
 }
 
 //------------------------------------------------------------
@@ -233,16 +241,21 @@ void particle::addDampingForce(){
 }
 
 //------------------------------------------------------------
-void particle::setInitialCondition(float px, float py, float vx, float vy){
+void particle::setInitialCondition(float px, float py, float vx, float vy, float _mass){
     pos.set(px,py);
 	vel.set(vx,vy);
+    mass = _mass;
 }
 
 //------------------------------------------------------------
 void particle::update(){	
 	if (bFixed == false){
-		vel = vel + frc;
-		pos = pos + vel;
+        frc *= inverse_mass;
+		vel += frc;
+        frc.set(0,0);
+        vel.limit(15);
+		vel.limit(15);
+        vel *= drag;
 	}
 }
 
