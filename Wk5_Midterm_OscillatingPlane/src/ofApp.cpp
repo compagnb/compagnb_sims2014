@@ -18,9 +18,9 @@ void ofApp::setup(){
     
     // set up triangles indices
     //first on the y axis
-    for(int y = 0; y < gridWidth; y++){
+    for(int y = 0; y < gridWidth - 1; y++){
         //now on the x axis
-        for(int x = 0; x < gridHeight; x++){
+        for(int x = 0; x < gridHeight -1; x++){
             i1 = x + gridWidth * y;
 			i2 = x+1 + gridWidth * y;
 			i3 = x + gridWidth * (y+1);

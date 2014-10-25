@@ -6,6 +6,8 @@ void ofApp::setup(){
     ofBackground(0,0,0);
 	ofSetFrameRate(60);
 	ofEnableSmoothing();
+    
+    test = 1.1;
 	
 	int rows = 40;
 	int cols = 40;
@@ -45,8 +47,8 @@ void ofApp::update(){
 
     
 	//apply forces
-	for (int i=0; i<ps.size(); i++) {
-		ps[i].addForce(ofVec3f(1.1,0,0));
+	for (int i=0; i<ps.size(); i++){
+		ps[i].addForce(ofVec3f(test,0,0));
 		ps[i].addForce(ofVec3f(0,sin(ofGetElapsedTimef()),0));
 
 	}
@@ -59,6 +61,8 @@ void ofApp::update(){
 	for (int i=0; i<ps.size(); i++) {
 		ps[i].update();
 	}
+    
+    //test++;
 	
 }
 

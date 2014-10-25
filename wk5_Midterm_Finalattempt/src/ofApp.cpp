@@ -40,40 +40,6 @@ void ofApp::setup(){
 			sp.push_back(s);
 		}
         
-        //shear springs left to right
-		if (x<cols-1 && y<rows-1) {
-            spring s;
-            s.init(&ps[i],&ps[i+cols+1],0.2);
-			sp.push_back(s);
-		}
-		
-		//shear springs right to left
-		if (y>0 && x<cols-1 && y<rows) {
-            spring s;
-            s.init(&ps[i],&ps[i-cols+1],0.2);
-			sp.push_back(s);
-		}
-		
-		//bending springs horizontal
-		if (x<cols-2) {
-                spring s;
-                s.init(&ps[i],&ps[i+2*cols],0.2);
-                sp.push_back(s);
-		}
-		
-		//bending springs vertical
-		if (y<rows-2) {
-                spring s;
-                s.init(&ps[i],&ps[i+2*cols],0.2);
-                sp.push_back(s);
-        }
-		
-		//bending springs diagonal
-		if (y<rows-2 && x<cols-2) {
-            spring s;
-            s.init(&ps[i],&ps[i+4*cols],0.2);
-            sp.push_back(s);
-		}
     }
     
 

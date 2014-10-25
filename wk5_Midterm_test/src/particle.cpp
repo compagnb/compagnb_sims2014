@@ -262,7 +262,7 @@ void particle::update(){
 //------------------------------------------------------------
 void particle::draw(){
     ofSetColor(0, 200, 255);
-    ofCircle(pos.x, pos.y, 5);
+    ofDrawSphere(pos.x, pos.y, 5);
 }
 
 
