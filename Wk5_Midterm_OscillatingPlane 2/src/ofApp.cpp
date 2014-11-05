@@ -3,6 +3,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    myMesh.setMode(OF_PRIMITIVE_POINTS);
+    
     gridWidth = 200;
     gridHeight = 200;
     

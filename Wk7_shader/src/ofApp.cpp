@@ -9,8 +9,18 @@ void ofApp::setup(){
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
     
+    //texture setup -----------------------------
+    //prepare for drawing shapes with glu
+    quadric = gluNewQuadric();
+    gluQuadricTexture(quadric, GL_TRUE);
+    gluQuadricNormals(quadric, GLU_SMOOTH);
+    
+    ofDisableArbTex(); //use old fashioned texture coordinates
+    water.loadImage("static_water.jpg");
     
     //grid setup -----------------------------
+    
+    //myMesh.setMode(OF_PRIMITIVE_POINTS);
     
     gridWidth = 200;
     gridHeight = 200;
@@ -34,23 +44,19 @@ void ofApp::setup(){
 			i4 = x+1 + gridWidth * (y+1);
             myMesh.addTriangle( i1, i2, i3);
             myMesh.addTriangle( i2, i4, i3);
+            
         }
     }
+
     
     
     //light setup -----------------------------
     setNormals(myMesh);
     myLight.enable();
     
-    //texture setup -----------------------------
-    glEnable(GL_DEPTH_TEST); //enable depth comparisons and update the depth buffer
-    ofDisableArbTex(); //needed for textures to work
-    water.loadImage("static_water.jpg");
     
-    //prepare quadric for shape
-    quadric = gluNewQuadric();
-    gluQuadricTexture(quadric, GL_TRUE);
-    gluQuadricNormals(quadric, GLU_SMOOTH);
+    
+    
     
     
     
@@ -66,14 +72,15 @@ void ofApp::update(){
 			ofPoint p = myMesh.getVertex( i );
             
 			//Get Perlin noise value
-			float value = ofNoise( x * 0.05, y * 0.05, time * 0.5 );
+			float value = ofNoise( x * 0.0005, y * 0.05, time * 0.5 );
             
 			//Change z-coordinate of vertex
 			p.z = value * 100;
 			myMesh.setVertex( i, p );
             
 			//Change color of vertex
-			myMesh.setColor( i, ofColor( value*255, value * 255, 255 ) );
+			//myMesh.setColor( i, ofColor( value*255, value * 255, 255 ) );
+            myMesh.setColor( i, ofColor (255));
 		}
 	}
 	setNormals( myMesh );	//Update the normals
@@ -96,14 +103,19 @@ void ofApp::draw(){
 	float time = ofGetElapsedTimef();   //Get time in seconds
 	float angle = time * 20;			//Compute angle. We rotate at speed
 	//20 degrees per second
-	ofRotate( 30, 1, 0, 0 );			//Rotate coordinate system
-	ofRotate( angle, 0, 0, 1 );
+    ofTranslate(0, 200);			//Rotate coordinate system
+	ofRotate( 90, 1, 0, 0 );			//Rotate coordinate system
+//	ofRotate( angle, 0, 0, 1 );
     
 	//Draw mesh
 	//Here ofSetColor() does not affects the result of drawing,
 	//because the mesh has its own vertices' colors
-    //water.getTextureReference().bind();
-	myMesh.draw();
+    ofSetColor(0);
+    
+    water.getTextureReference().bind(); // use image's texture for drawing
+    myMesh.draw(); // draw
+    water.unbind(); // end using images texture
+
     
 	ofPopMatrix();      //Restore the coordinate system
     

@@ -39,6 +39,10 @@ void ofApp::draw(){
     ofFill();
     ofSetColor(255);
     ofRect(200, 200, 100, 100);
+    ofRotate(angle *0.5);
+    ofRect(100, 100, 50, 50);
+    ofRotate(angle * 0.25);
+    ofRect(40, 40, 10, 10);
     ofPopMatrix();
     fbo2.end();
     
