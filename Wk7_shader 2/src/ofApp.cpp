@@ -9,9 +9,6 @@ void ofApp::setup(){
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
     
-    //shader setup
-    shader.load( "shaderVert.c", "shaderFrag.c" );
-    
     //texture setup -----------------------------
     //prepare for drawing shapes with glu
     quadric = gluNewQuadric();
@@ -51,13 +48,16 @@ void ofApp::setup(){
         }
     }
 
-    //fbo setup
-    fbo.allocate( ofGetWidth(), ofGetHeight() );
     
     
     //light setup -----------------------------
     setNormals(myMesh);
     myLight.enable();
+    
+    
+    
+    
+    
     
     
 }
@@ -80,7 +80,7 @@ void ofApp::update(){
             
 			//Change color of vertex
 			//myMesh.setColor( i, ofColor( value*255, value * 255, 255 ) );
-            //myMesh.setColor( i, ofColor (255));
+            myMesh.setColor( i, ofColor (255));
 		}
 	}
 	setNormals( myMesh );	//Update the normals
@@ -94,12 +94,9 @@ void ofApp::draw(){
 	//Set a gradient background from white to gray
 	ofBackgroundGradient( ofColor( 255 ), ofColor( 128 ) );
     
-    
-    fbo.begin();
-    
 	ofPushMatrix();						//Store the coordinate system
     
-    //Move the coordinate center to screen's center
+	//Move the coordinate center to screen's center
 	ofTranslate( ofGetWidth()*0.5, ofGetHeight()*0.5, 0 );
     
 	//Calculate the rotation angle
@@ -108,30 +105,19 @@ void ofApp::draw(){
 	//20 degrees per second
     ofTranslate(0, 200);			//Rotate coordinate system
 	ofRotate( 90, 1, 0, 0 );			//Rotate coordinate system
-    //Draw mesh
+//	ofRotate( angle, 0, 0, 1 );
+    
+	//Draw mesh
 	//Here ofSetColor() does not affects the result of drawing,
 	//because the mesh has its own vertices' colors
     ofSetColor(0);
     
-//    water.getTextureReference().bind(); // use image's texture for drawing
+    water.getTextureReference().bind(); // use image's texture for drawing
     myMesh.draw(); // draw
-//    water.unbind(); // end using images texture
+    water.unbind(); // end using images texture
 
     
 	ofPopMatrix();      //Restore the coordinate system
-    
-    fbo.end();
-    
-    //2. Draw through shader ---------------------------
-	shader.begin();
-    float time1 = ofGetElapsedTimef();
-    shader.setUniform1f("time", time1);
-    
-	//Draw fbo image
-	ofSetColor( 255, 255, 255 );
-	fbo.draw( 0, 0 );
-    
-	shader.end();
     
 }
 

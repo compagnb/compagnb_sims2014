@@ -3,32 +3,16 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    //of setup -------------------------------
-    
-    ofBackground(0,0,0);
-    ofSetFrameRate(30);
     ofSetVerticalSync(true);
+    ofEnableDepthTest();
     
-    //shader setup
-    shader.load( "shaderVert.c", "shaderFrag.c" );
-    
-    //texture setup -----------------------------
-    //prepare for drawing shapes with glu
-    quadric = gluNewQuadric();
-    gluQuadricTexture(quadric, GL_TRUE);
-    gluQuadricNormals(quadric, GLU_SMOOTH);
-    
-    ofDisableArbTex(); //use old fashioned texture coordinates
     water.loadImage("static_water.jpg");
-    
-    //grid setup -----------------------------
-    
-    //myMesh.setMode(OF_PRIMITIVE_POINTS);
-    
+
     gridWidth = 200;
     gridHeight = 200;
     
-    // set up the vertices and colors - first on the y axis
+    // set up the vertices and colors
+    //first on the y axis
     for(int y = 0; y < gridWidth; y++){
         //now on the x axis
         for(int x = 0; x < gridHeight; x++){
@@ -37,7 +21,8 @@ void ofApp::setup(){
         }
     }
     
-    // set up triangles indices - first on the y axis
+    // set up triangles indices
+    //first on the y axis
     for(int y = 0; y < gridWidth - 1; y++){
         //now on the x axis
         for(int x = 0; x < gridHeight -1; x++){
@@ -47,23 +32,22 @@ void ofApp::setup(){
 			i4 = x+1 + gridWidth * (y+1);
             myMesh.addTriangle( i1, i2, i3);
             myMesh.addTriangle( i2, i4, i3);
-            
         }
     }
-
-    //fbo setup
-    fbo.allocate( ofGetWidth(), ofGetHeight() );
-    
-    
-    //light setup -----------------------------
     setNormals(myMesh);
     myLight.enable();
+
     
     
+    
+    bWireframe = true;
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    
+    ofSetWindowTitle(ofToString(ofGetFrameRate()));
+    
     float time = ofGetElapsedTimef();	//Get time
 	//Change vertices
 	for (int y=0; y<gridHeight; y++) {
@@ -72,15 +56,14 @@ void ofApp::update(){
 			ofPoint p = myMesh.getVertex( i );
             
 			//Get Perlin noise value
-			float value = ofNoise( x * 0.0005, y * 0.05, time * 0.5 );
+			float value = ofNoise( x * 0.05, y * 0.005, time * 0.5 );
             
 			//Change z-coordinate of vertex
 			p.z = value * 100;
 			myMesh.setVertex( i, p );
             
 			//Change color of vertex
-			//myMesh.setColor( i, ofColor( value*255, value * 255, 255 ) );
-            //myMesh.setColor( i, ofColor (255));
+			myMesh.setColor( i, ofColor( value*255, value * 255, 255 ) );
 		}
 	}
 	setNormals( myMesh );	//Update the normals
@@ -91,93 +74,90 @@ void ofApp::update(){
 void ofApp::draw(){
 	ofEnableDepthTest();				//Enable z-buffering
     
-	//Set a gradient background from white to gray
+    //Set a gradient background from white to gray
 	ofBackgroundGradient( ofColor( 255 ), ofColor( 128 ) );
-    
-    
-    fbo.begin();
     
 	ofPushMatrix();						//Store the coordinate system
     
-    //Move the coordinate center to screen's center
+	//Move the coordinate center to screen's center
 	ofTranslate( ofGetWidth()*0.5, ofGetHeight()*0.5, 0 );
     
 	//Calculate the rotation angle
 	float time = ofGetElapsedTimef();   //Get time in seconds
 	float angle = time * 20;			//Compute angle. We rotate at speed
 	//20 degrees per second
-    ofTranslate(0, 200);			//Rotate coordinate system
-	ofRotate( 90, 1, 0, 0 );			//Rotate coordinate system
-    //Draw mesh
+	ofRotate( 30, 90, 0, 0 );			//Rotate coordinate system
+	//ofRotate( angle, 0, 0, 1 );
+    
+	//Draw mesh
 	//Here ofSetColor() does not affects the result of drawing,
 	//because the mesh has its own vertices' colors
-    ofSetColor(0);
-    
-//    water.getTextureReference().bind(); // use image's texture for drawing
-    myMesh.draw(); // draw
-//    water.unbind(); // end using images texture
-
+	water.bind();
+    myMesh.drawWireframe();
+    water.unbind();
     
 	ofPopMatrix();      //Restore the coordinate system
+
+    if(bWireframe){
+        myMesh.drawWireframe();
+    } else {
+        water.bind();
+        myMesh.draw();
+        water.unbind();
+    }
     
-    fbo.end();
     
-    //2. Draw through shader ---------------------------
-	shader.begin();
-    float time1 = ofGetElapsedTimef();
-    shader.setUniform1f("time", time1);
-    
-	//Draw fbo image
-	ofSetColor( 255, 255, 255 );
-	fbo.draw( 0, 0 );
-    
-	shader.end();
-    
+    cam.end();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    
+        if(key == 'w'){
+            bWireframe = !bWireframe;
+        } else {
+            //terrainShader.load("terrain");
+        }
+
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-    
+
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-    
+
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-    
+
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    
+
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-    
+
 }
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-    
+
 }
 
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){
-    
+
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){
-    
+void ofApp::dragEvent(ofDragInfo dragInfo){ 
+
 }
 
 //--------------------------------------------------------------

@@ -19,35 +19,32 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    ofShader shader;	//Shader
-	ofFbo fbo;			//Buffer for intermediate drawing
-    
     ofImage water;
     GLUquadricObj *quadric;
     
-    ofMesh myMesh;
-    ofLight myLight;
+        ofMesh myMesh;
+        ofLight myLight;
     
-    void setNormals(ofMesh &mesh);
+        void setNormals(ofMesh &mesh);
     
-    //grid variables
-    int gridWidth;
-    int gridHeight;
+        //grid variables
+        int gridWidth;
+        int gridHeight;
     
-
-    float time;
-    float angle;
+        //
+        float time;
+        float angle;
     
-    int numVert;
-    int numTri;
+        int numVert;
+        int numTri;
     
-    ofPoint dir;
+        ofPoint dir;
     
-    int i1;
-    int i2;
-    int i3;
-    int i4;
+        int i1;
+        int i2;
+        int i3;
+        int i4;
     
-    float test;
+        float test;
 		
 };

@@ -18,36 +18,5 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    
-    ofShader shader;	//Shader
-	ofFbo fbo;			//Buffer for intermediate drawing
-    
-    ofImage water;
-    GLUquadricObj *quadric;
-    
-    ofMesh myMesh;
-    ofLight myLight;
-    
-    void setNormals(ofMesh &mesh);
-    
-    //grid variables
-    int gridWidth;
-    int gridHeight;
-    
-
-    float time;
-    float angle;
-    
-    int numVert;
-    int numTri;
-    
-    ofPoint dir;
-    
-    int i1;
-    int i2;
-    int i3;
-    int i4;
-    
-    float test;
 		
 };

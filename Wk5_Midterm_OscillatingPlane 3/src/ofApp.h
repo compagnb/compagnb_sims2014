@@ -19,14 +19,9 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    ofShader shader;	//Shader
-	ofFbo fbo;			//Buffer for intermediate drawing
-    
-    ofImage water;
-    GLUquadricObj *quadric;
-    
     ofMesh myMesh;
     ofLight myLight;
+    ofEasyCam cam;
     
     void setNormals(ofMesh &mesh);
     
@@ -34,7 +29,7 @@ class ofApp : public ofBaseApp{
     int gridWidth;
     int gridHeight;
     
-
+    //
     float time;
     float angle;
     
@@ -46,8 +41,14 @@ class ofApp : public ofBaseApp{
     int i1;
     int i2;
     int i3;
-    int i4;
+	int i4;
     
-    float test;
-		
+    ofTexture heightMap;
+    ofVboMesh terrain;
+    ofShader terrainShader;
+    
+    ofImage water;
+    
+    bool            bWireframe;
+    
 };
