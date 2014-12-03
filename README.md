@@ -1,7 +1,9 @@
 Creative Code Homework
-=======================
-
+======================
 PSAM 5566 - B Creative Code Homework Repository
+
+iOS Simulations can be found https://github.com/compagnb/compagnb_iOS_sims2014.git
+
 
 
 Week 3 Non-Code Homework:
