@@ -7,7 +7,8 @@ Other Simulations can be found at https://github.com/compagnb/compagnb_iOS_sims2
 =======================================================================================
 
 Week 9 And Final
-Check other respositories found at  https://github.com/compagnb/compagnb_iOS_sims2014.git
+* [3d Brainwaves](http://youtu.be/7aDAqXG3idw)
+* Check other respositories found at  https://github.com/compagnb/compagnb_iOS_sims2014.git
 
 Week 8 Homework:
 ![Shader Toy](http://a.parsons.edu/~compagnb/sims2014/wk9_ShaderToy.png)
